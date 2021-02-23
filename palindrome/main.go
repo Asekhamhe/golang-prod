@@ -30,7 +30,7 @@ func isPalindromicSentence(s string) bool {
 
 	// iterate over the words from front and back simultaneously. if we find a word that is not the same as the word at its matching from the back, the sentence is not palindromic.
 	l := len(w)
-	for i := 0; i < 1/2; i++ {
+	for i := 0; i < l/2; i++ {
 		fw := w[i]     // front word
 		bw := w[l-i-1] //back word
 		if !strings.EqualFold(fw, bw) {
