@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io"
 	"io/ioutil"
+	"log"
 	"net/http"
 	"os"
 	"time"
@@ -18,8 +19,14 @@ func main() {
 		go fetch(url, ch) // start a goroutine
 	}
 	for range os.Args[1:] {
+		message := []byte(<-ch)
+		err := ioutil.WriteFile("./output.txt", message, 0644)
+		if err != nil {
+			log.Fatal(err)
+		}
 		fmt.Println(<-ch) //receive from channel
 	}
+
 	fmt.Printf("%.2fs elapsed\n", time.Since(start).Seconds())
 }
 
@@ -32,6 +39,7 @@ func fetch(url string, ch chan<- string) {
 	}
 
 	nbytes, err := io.Copy(ioutil.Discard, resp.Body)
+
 	resp.Body.Close() // don't leak resources
 	if err != nil {
 		ch <- fmt.Sprintf("while reading %s: %v", url, err)
