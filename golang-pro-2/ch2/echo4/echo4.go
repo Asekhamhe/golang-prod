@@ -15,7 +15,7 @@ var sep = flag.String("s", " ", "seperator")
 
 func main() {
 	flag.Parse()
-	// *sep ===> access the value of an address
+	// *sep ===> access the value of an address indirectly
 	fmt.Print(strings.Join(flag.Args(), *sep))
 	if !*n {
 		fmt.Println()
