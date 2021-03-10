@@ -27,7 +27,7 @@ type Issue struct {
 	Title     string
 	State     string
 	User      *User
-	CreatedAr time.Time `json:"created_at"`
+	CreatedAt time.Time `json:"created_at"`
 	Body      string    // in Markdown format
 }
 
