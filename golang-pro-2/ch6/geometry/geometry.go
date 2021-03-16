@@ -1,5 +1,5 @@
 // https://play.golang.org/p/xfHwQ-9CVxx
-// Difference between pointer receiver method and normal receiver method
+// Difference between pointer type receiver method and named type receiver method
 package main
 
 import (
