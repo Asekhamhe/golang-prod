@@ -48,3 +48,6 @@ func main() {
 	fmt.Println(Display(b))
 	fmt.Println(Display(m))
 }
+
+// interface
+// https://play.golang.org/p/T0GnoRkicOz
