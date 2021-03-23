@@ -2,9 +2,11 @@
 package main
 
 import (
-	"io"
+	"bufio"
+	"fmt"
 	"log"
 	"net"
+	"strings"
 	"time"
 )
 
@@ -24,13 +26,18 @@ func main() {
 	}
 }
 
+func echo(c net.Conn, shout string, delay time.Duration) {
+	fmt.Fprintln(c, "\t", strings.ToUpper(shout))
+	time.Sleep(delay)
+	fmt.Fprintln(c, "\t", shout)
+	fmt.Fprintln(c, "\t", strings.ToLower(shout))
+}
+
 func handleConn(c net.Conn) {
-	defer c.Close()
-	for {
-		_, err := io.WriteString(c, time.Now().Format("15:04:05\n"))
-		if err != nil {
-			return // e.g. client disconnected
-		}
-		time.Sleep(1 * time.Second)
+	input := bufio.NewScanner(c)
+	for input.Scan() {
+		echo(c, input.Text(), 1*time.Second)
 	}
+	// NOTE: ignoring potential errors from the input.Err()
+	c.Close()
 }
