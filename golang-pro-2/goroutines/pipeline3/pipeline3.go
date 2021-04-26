@@ -26,7 +26,9 @@ func printer(in <-chan int) {
 }
 
 func main() {
+	// make a channel for counter function
 	naturals := make(chan int)
+	// make a channel for squarer function
 	squares := make(chan int)
 
 	go counter(naturals)
